@@ -1,0 +1,94 @@
+﻿@model IEnumerable<EMS_H_EmreCetin.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<h1>Employees</h1>
+
+<!-- Success Message -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<!-- Error Message -->
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<div class="row mb-3">
+    <div class="col-md-12">
+        <form asp-action="Index" method="get" class="form-inline">
+            <div class="form-group mx-2">
+                <label class="mr-2">Department:</label>
+                @{
+                    var departments = ViewBag.Departments as SelectList ?? new SelectList(new List<SelectListItem>(), "Value", "Text");
+                }
+                @Html.DropDownList("departmentId", departments, "All Departments", new { @class = "form-control" })
+            </div>
+            <div class="form-group mx-2">
+                <label class="mr-2">Hire Date Range:</label>
+                <input type="date" name="startDate" class="form-control" />
+                <input type="date" name="endDate" class="form-control" />
+            </div>
+            <div class="form-group mx-2">
+                <label class="mr-2">Salary Range:</label>
+                <input type="number" name="minSalary" class="form-control" placeholder="Min" />
+                <input type="number" name="maxSalary" class="form-control" placeholder="Max" />
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FullName)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.Department)</th>
+            <th>@Html.DisplayNameFor(model => model.HireDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Salary)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Department.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.HireDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Salary)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">No employees found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

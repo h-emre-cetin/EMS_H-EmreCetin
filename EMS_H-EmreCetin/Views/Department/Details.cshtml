@@ -1,0 +1,61 @@
+﻿@model EMS_H_EmreCetin.Models.Department
+
+@{
+    ViewData["Title"] = "Department Details";
+}
+
+<h1>Department Details</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>@Html.DisplayFor(model => model.Name)</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-2">Total Employees</dt>
+                    <dd class="col-sm-10">@(Model.Employees?.Count ?? 0)</dd>
+                </dl>
+            </div>
+            <div class="card-footer">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+
+        @if (Model.Employees != null && Model.Employees.Any())
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h5>Employees in this Department</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Hire Date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var employee in Model.Employees)
+                            {
+                                <tr>
+                                    <td>@employee.FullName</td>
+                                    <td>@employee.Email</td>
+                                    <td>@employee.PhoneNumber</td>
+                                    <td>@employee.HireDate.ToShortDateString()</td>
+                                    <td>@employee.Salary.ToString("C")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>

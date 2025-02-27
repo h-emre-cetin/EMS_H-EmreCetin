@@ -1,0 +1,37 @@
+﻿@model IEnumerable<EMS_H_EmreCetin.Models.DepartmentStatistics>
+
+@{
+    ViewData["Title"] = "Department Statistics";
+}
+
+<h1>Department Statistics</h1>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Department Name</th>
+                        <th class="text-center">Total Employees</th>
+                        <th class="text-end">Average Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var stat in Model)
+                    {
+                        <tr>
+                            <td>@stat.DepartmentName</td>
+                            <td class="text-center">@stat.TotalEmployees</td>
+                            <td class="text-end">@stat.AverageSalary.ToString("N2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Back to Home</a>
+</div>

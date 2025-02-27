@@ -1,0 +1,35 @@
+﻿@model EMS_H_EmreCetin.Models.Employee
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<h1>Employee Details</h1>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.FullName)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.FullName)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Email)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.PhoneNumber)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Department)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Department.Name)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.HireDate)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.HireDate)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Salary)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Salary)</dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
