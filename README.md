@@ -18,7 +18,7 @@ This is a web-based Employee Management System built with ASP.NET Core 8.0 and E
 ## Getting Started
 1. Clone the repository
 ```bash
-git clone [your-repository-url]
+git clone https://github.com/h-emre-cetin/EMS_H-EmreCetin
 ```
 - Navigate to the project directory
 - Restore NuGet packages
